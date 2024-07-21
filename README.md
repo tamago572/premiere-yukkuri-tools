@@ -36,4 +36,4 @@ main.jsにはhtmlから呼び出されるJS
 
 styles.scssにはCSSを書く。→styles.cssにコンパイル
 
-
+index.html→main.js→hostscript.jsx→Premiere Proという流れ
