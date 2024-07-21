@@ -30,9 +30,46 @@ html {
     text-align: center;
     font-size: x-large;
     font-weight: normal;
+
+    &.dragging {
+        background-color: #f0f0f0;
+        color: rgba(0, 0, 0, 0.8);
+    }
 }
 
 
+.generate-yukkuri-voices-area {
+    p {
+        font-size: medium;
+    }
+}
+
+
+.aqarea {
+    padding: 12px;
+    margin-bottom: 15px;
+
+}
+
+
+
+.aqtxtarea {
+    width: 70%;
+    border-radius: 5px;
+}
+
+.aqinputarea {
+    display: flex;
+    gap: 20px;
+
+    button {
+        width: 15%;
+    }
+}
+
+#aqgenbtn {
+    background-color: white;
+}
 
 /*
 Those classes will be edited at runtime with values specified

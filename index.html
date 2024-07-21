@@ -10,16 +10,24 @@
 </head>
 
 <body class="hostElt">
-    <div class="dragArea">
+    <div class="dragArea" id="dragArea">
         <div>
-            <span>音声ファイルをここにD&D</span><br>
+            <span id="dragAreaText">ここに音声ファイルをD&D</span><br>
             <span>.wav/.mp3</span>
         </div>
 
     </div>
 
     <div id="content">
+        <div class="generate-yukkuri-voices-area" id="generate_yukkuri_voices_area">
+            <p>※音声合成はWindowsのみ対応です</p>
+            <input type="text" name="aqplayer" id="aqplayer" class="aqarea aqtxtarea" placeholder="AquesTalkPlayer.exeのパス">
+            <div class="aqinputarea">
+                <textarea name="aqtxt" id="aqtxt" class="aqarea aqtxtarea" placeholder="ゆっくりに喋らせるセリフを入力"></textarea>
+                <input type="button" class="aqarea" value="生成" id="aqgenbtn">
+            </div>
 
+        </div>
         <div>
             <button id="btn_test" class="topcoat-button--large hostFontSize">Call ExtendScript</button>
         </div>
