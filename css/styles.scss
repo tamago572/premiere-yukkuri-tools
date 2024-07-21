@@ -1,0 +1,65 @@
+/*Your styles*/
+html {
+    height: 100%;
+    body {
+        margin: 10px;
+        height: 100%;
+    }
+}
+
+
+#content {
+    margin-right:auto;
+    margin-left:auto;
+    vertical-align:middle;
+    width:100%;
+}
+
+
+#btn_test{
+    width: 100%;
+}
+
+.dragArea {
+    /* 上下左右中心にするやつｙ */
+    display: grid;
+    place-content: center;
+
+    /* ドラッグエリアのスタイル */
+    height: 70%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: normal;
+}
+
+
+
+/*
+Those classes will be edited at runtime with values specified
+by the settings of the CC application
+*/
+.hostFontColor{}
+.hostFontFamily{}
+.hostFontSize{}
+
+/*font family, color and size*/
+.hostFont{}
+/*background color*/
+.hostBgd{}
+/*lighter background color*/
+.hostBgdLight{}
+/*darker background color*/
+.hostBgdDark{}
+/*background color and font*/
+.hostElt{}
+
+
+.hostButton{
+    border:1px solid;
+    border-radius:2px;
+    height:20px;
+    vertical-align:bottom;
+    font-family:inherit;
+    color:inherit;
+    font-size:inherit;
+}

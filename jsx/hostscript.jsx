@@ -3,5 +3,5 @@
 
 
 function sayHello(){
-    alert("hello from ExtendScript");
+    alert("24歳学生です。やりますねぇ！やりますやります");
 }
