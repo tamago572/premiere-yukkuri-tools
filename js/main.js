@@ -60,8 +60,8 @@
 
             dragArea.classList.remove('dragging');
             dragAreaText.textContent = 'ドロップで字幕を挿入';
-            alert(e.dataTransfer.files[0].path);
-            csInterface.evalScript(`sayHello(${e.dataTransfer.files[0].path})`);
+            // alert(e.dataTransfer.files[0].path);
+            csInterface.evalScript(`setAudioSubtitle(${e.dataTransfer.files[0].path})`);
 
         }
 
