@@ -17,16 +17,33 @@
         </div>
     </div>
 
+    <div>
+        <h1>字幕設定</h1>
+        
+        <h2>.morgtファイルの指定</h2>
+        <select name="mogrt_file" id="mogrt_file">
+            <option value="desc">--.morgtファイルを選択--</option>
+            <option value="first">example.morgt</option>
+        </select>
+
+        <h2>.morgtファイルの追加</h2>
+        <input type="file" name="mogrt_input_file" id="mogrt_input_file">
+        <input type="button" value="追加">
+    </div>
+
     <div id="content">
         <div class="generate-yukkuri-voices-area" id="generate_yukkuri_voices_area">
-            <p>※音声合成はWindowsのみ対応</p>
+            <h1>音声合成</h1>
+            <p>※Windowsのみ対応</p>
             <input type="text" name="aqplayer" id="aqplayer" class="aqarea aqtxtarea" placeholder="AquesTalkPlayer.exeのパス">
             <div class="aqinputarea">
                 <textarea name="aqtxt" id="aqtxt" class="aqarea aqtxtarea" placeholder="ゆっくりに喋らせるセリフを入力"></textarea>
                 <input type="button" class="aqarea" value="生成" id="aqgenbtn">
             </div>
-
         </div>
+
+
+
         <div>
             <button id="btn_test" class="topcoat-button--large hostFontSize">Call ExtendScript</button>
         </div>
