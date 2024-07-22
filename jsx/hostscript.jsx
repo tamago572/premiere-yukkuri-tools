@@ -3,5 +3,18 @@
 
 
 function sayHello(filePath){
+    alert(getCurrentTime());
     alert(`filePath: ${filePath}`);
+}
+
+function testbtn() {
+    alert("ゆっくりしていってね！！！");
+}
+
+function getCurrentTime() {
+    if (app.project && app.project.activeItem) {
+        return app.project.activeItem.time;
+    } else {
+        alert("アクティブなコンポジションがありません。");
+    }
 }

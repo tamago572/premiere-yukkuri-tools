@@ -8,6 +8,10 @@ html body {
   height: 100%;
 }
 
+.section {
+  padding-bottom: 20px;
+}
+
 #content {
   margin-right: auto;
   margin-left: auto;
@@ -32,10 +36,6 @@ html body {
 .dragArea.dragging {
   background-color: #f0f0f0;
   color: rgba(0, 0, 0, 0.8);
-}
-
-.generate-yukkuri-voices-area p {
-  font-size: medium;
 }
 
 .aqarea {

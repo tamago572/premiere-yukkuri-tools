@@ -67,7 +67,7 @@
 
 
         $("#btn_test").click(function () {
-            csInterface.evalScript('sayHello()');
+            csInterface.evalScript('testbtn()');
         });
     }
 
