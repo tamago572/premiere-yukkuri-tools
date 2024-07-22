@@ -2,6 +2,6 @@
 /*global $, Folder*/
 
 
-function sayHello(){
-    alert("24歳学生です。やりますねぇ！やりますやります");
+function sayHello(filePath){
+    alert(`filePath: ${filePath}`);
 }

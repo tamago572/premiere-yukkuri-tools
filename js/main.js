@@ -41,7 +41,7 @@
             e.preventDefault();
             dragArea.classList.add('dragging');
             dragAreaText.textContent = 'ドロップで字幕を挿入';
-            csInterface.evalScript('sayHello()');
+            csInterface.evalScript(`sayHello(${e.dataTransfer.files[0].path})`);
 
         }
 
