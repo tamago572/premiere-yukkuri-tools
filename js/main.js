@@ -60,9 +60,21 @@
 
             dragArea.classList.remove('dragging');
             dragAreaText.textContent = 'ドロップで字幕を挿入';
-            // alert(e.dataTransfer.files[0].path);
-            csInterface.evalScript(`setAudioSubtitle(${e.dataTransfer.files[0].path})`);
 
+            // Eventからファイルパスを取得
+            let filePath = e.dataTransfer.files[0].path;
+
+            // ファイルパスのバックスラッシュをエスケープ
+            filePath = filePath.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
+
+            showAlert(filePath);
+
+            csInterface.evalScript(`insertAudioAndTitle("${filePath}")`);
+
+        }
+
+        function showAlert(msg) {
+            csInterface.evalScript(`showAlert("${msg}")`);
         }
 
 
