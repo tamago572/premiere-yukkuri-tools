@@ -61,6 +61,8 @@
             dragArea.classList.remove('dragging');
             dragAreaText.textContent = 'ドロップで字幕を挿入';
 
+            const audio_layer_id = document.getElementById("audio_layer_id").value - 1;
+
             // Eventからファイルパスを取得
             let filePath = e.dataTransfer.files[0].path;
 
@@ -69,7 +71,7 @@
 
             showAlert(filePath);
 
-            csInterface.evalScript(`insertAudioAndTitle("${filePath}")`);
+            csInterface.evalScript(`insertAudioAndTitle("${filePath}", "${audio_layer_id}")`);
 
         }
 

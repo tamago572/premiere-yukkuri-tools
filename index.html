@@ -10,6 +10,7 @@
 </head>
 
 <body class="hostElt">
+
     <div class="dragArea section" id="dragArea">
         <div>
             <span id="dragAreaText">ここに音声ファイルをD&D</span><br>
@@ -43,6 +44,12 @@
             <textarea name="aqtxt" id="aqtxt" class="aqarea aqtxtarea" placeholder="ゆっくりに喋らせるセリフを入力"></textarea>
             <input type="button" class="aqarea" value="生成" id="aqgenbtn">
         </div>
+    </div>
+
+    <div class="section">
+        <h1>音声ファイル配置設定</h1>
+        <p>音声ファイルを配置するレイヤーを設定します</p>
+        <span style="font-size: 16px;">A</span><input type="number" name="audio_layer_id" id="audio_layer_id" placeholder="2" value="2" min="1">
     </div>
 
     <div>

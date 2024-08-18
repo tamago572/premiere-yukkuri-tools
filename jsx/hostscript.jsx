@@ -1,9 +1,8 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global $, Folder*/
 
-
+// これがメインの関数
 function insertAudioAndTitle(filePath, audioTrackNumber) {
-    audioTrackNumber = 1; // 音声クリップを配置するトラック番号 (A1=0, A2=1...)
 
     // プロジェクトにファイルをインポート
     importFilesToRoot(filePath);
