@@ -95,9 +95,39 @@ function insertMogrtTitle(filePath, videoTrackNumber) {
         var insertedMogrt = app.project.activeSequence.importMGT(filePath, getCurrentCTI().ticks, videoTrackNumber, 0);
         
         try {
-            // mogrtのプロパティを設定
-            var mogrtComponent = insertedMogrt.components[0];
-            mogrtComponent.properties[0].setValue("テロップの内容");
+            showComponentsList(insertedMogrt);
+
+            var components = insertedMogrt.components;
+            for (var i = 0; i < components.numItems; i++) {
+                var comp = components[i];
+                if (comp.displayName == "テキスト") {
+                    // すべてのプロパティをalertで表示 (デバッグ用)
+                    for (var j = 0; j < comp.properties.numItems; j++) {
+                        alert("プロパティ名: " + comp.properties[j].displayName + " プロパティの値: " + comp.properties[j].getValue());
+                    }
+                    // ------------------------------
+
+                    // var property = comp.properties[7];
+                    // if (property) {
+                    //     try {
+                    //         alert("テキストの値: " + property.getValue());
+                    //         property.setValue("新しいテキスト");
+                    //     } catch (e) {
+                    //         alert("プロパティの設定に失敗しました: " + e.message);
+                    //     } 
+                    // }
+                }
+            }
+
+            // if (insertedMogrt.properties.length > 3) {
+            //     insertedMogrt.properties[3].setValue("テロップの内容");
+            // } else {
+            //     alert("プロパティ[3]が存在しません。");
+            // }
+
+            // // mogrtのプロパティを設定
+            // var mogrtComponent = insertedMogrt.components[0];
+            // mogrtComponent.properties[3].setValue("テロップの内容");
 
         } catch (e) {
             alert("Mogrtのプロパティ変更に失敗しました: " + e.message);
@@ -130,4 +160,21 @@ function insertMogrtTitle(filePath, videoTrackNumber) {
 // アラートを表示する関数 main.jsから呼び出す用
 function showAlert(msg) {
     alert(msg);
+}
+
+
+
+function showComponentsList(targetClip) {
+    var components = targetClip.components;
+    var componentsList = "";
+    for (var i = 0; i < components.numItems; i++) {
+        try {
+            // componentsList += components[i].displayName + " プロパティの値: " + components[i].getValue() + i + " \n";
+            componentsList += components[i].displayName + " " + i + " \n";
+
+        } catch (e) {
+            alert("コンポーネントの取得に失敗しました: " + e.message);
+        }
+    }
+    alert(componentsList);
 }

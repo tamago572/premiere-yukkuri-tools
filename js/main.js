@@ -69,7 +69,7 @@
             // ファイルパスのバックスラッシュをエスケープ
             filePath = filePath.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
 
-            showAlert(filePath);
+            // showAlert(filePath);
 
             csInterface.evalScript(`insertAudioAndTitle("${filePath}", "${audio_layer_id}")`);
 
