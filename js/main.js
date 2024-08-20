@@ -63,6 +63,9 @@
 
             const audio_layer_id = document.getElementById("audio_layer_id").value - 1;
 
+            // const video_layer_id = document.getElementById("video_layer_id").value - 1;
+            const video_layer_id = 1;
+
             // Eventからファイルパスを取得
             let filePath = e.dataTransfer.files[0].path;
 
@@ -71,7 +74,7 @@
 
             // showAlert(filePath);
 
-            csInterface.evalScript(`insertAudioAndTitle("${filePath}", "${audio_layer_id}")`);
+            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id})`);
 
         }
 

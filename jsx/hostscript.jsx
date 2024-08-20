@@ -2,7 +2,7 @@
 /*global $, Folder*/
 
 // これがメインの関数
-function insertAudioAndTitle(filePath, audioTrackNumber) {
+function insertAudioAndTitle(filePath, audioTrackNumber, videoTrackNumber) {
 
     // プロジェクトにファイルをインポート
     importFilesToRoot(filePath);
@@ -18,16 +18,36 @@ function insertAudioAndTitle(filePath, audioTrackNumber) {
         // オーディオトラックにクリップ (音声ファイル)を追加
         try {
             // クリップをシーケンスに配置 [1]はトラック番号 A1=0, A2=1...
-            activeSequence.audioTracks[audioTrackNumber].overwriteClip(importedItem, currentCTI);
+            activeSequence.audioTracks[audioTrackNumber].overwriteClip(importedItem, currentCTI.ticks);
         } catch (e) {
             alert("音声ファイルの挿入に失敗しました: " + e.message);
         }
 
 
         // ビデオトラックにMogrtを追加
-        var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\エクステンション用テスト.mogrt";
-        // var mogrtFilePath = "C:\\Users\\7f7fn\\Documents\\Premiere\\琴葉茜字幕.mogrt";
-        insertMogrtTitle(mogrtFilePath, 1);
+        // var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\エクステンション用テスト.mogrt";
+        var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\琴葉葵字幕_凸版文久ゴシック.mogrt";
+
+        // showMogrtPropList(mogrtFilePath, 0);
+
+        var insertedMogrt = null;
+        // テロップを挿入
+        try {
+            insertedMogrt = activeSequence.importMGT(mogrtFilePath, currentCTI.ticks, videoTrackNumber, 0);
+        } catch (e) {
+            alert("テロップの挿入に失敗しました: " + e.message);
+        }
+
+        // ソーステキストを設定
+        try {
+            var component = insertedMogrt.getMGTComponent();
+
+            component.properties[0].setValue("新しいテキスト");
+
+        } catch (e) {
+            alert("ソーステキストの設定に失敗しました: " + e.message);
+        }
+
     } else {
         alert("インポートしたアイテムが見つかりませんでした。");
     }
@@ -35,6 +55,17 @@ function insertAudioAndTitle(filePath, audioTrackNumber) {
 
 function testbtn() {
     alert("ゆっくりしていってね！！！");
+}
+
+
+// getMGTComponentを使用した、プロパティ一覧を表示する関数
+function compPropList(insertedMogrt) {
+    var component = insertedMogrt.getMGTComponent();
+
+    alert("コンポーネント数: " + component.properties.numItems);
+    for (var i = 0; i < component.properties.numItems; i++) {
+        alert("Comp No. " + i + "コンポーネント名: " + component.properties[i].displayName);
+    }
 }
 
 // 現在位置を取得する関数
@@ -85,76 +116,43 @@ function findImportedItem(filePath) {
         }
     }
     return null;
-    
 }
 
-// シーケンスにMogrtを使用したテロップを挿入する関数
-function insertMogrtTitle(filePath, videoTrackNumber) {
+// シーケンスにMogrtを使用したテロップを挿入し、プロパティ一覧を表示する関数
+function showMogrtPropList(filePath, videoTrackNumber) {
     // mogrtをシーケンスに配置
-    try {
-        var insertedMogrt = app.project.activeSequence.importMGT(filePath, getCurrentCTI().ticks, videoTrackNumber, 0);
-        
-        try {
-            showComponentsList(insertedMogrt);
-
-            var components = insertedMogrt.components;
-            for (var i = 0; i < components.numItems; i++) {
-                var comp = components[i];
-                if (comp.displayName == "テキスト") {
-                    // すべてのプロパティをalertで表示 (デバッグ用)
-                    for (var j = 0; j < comp.properties.numItems; j++) {
-                        alert("プロパティ名: " + comp.properties[j].displayName + " プロパティの値: " + comp.properties[j].getValue());
-                    }
-                    // ------------------------------
-
-                    // var property = comp.properties[7];
-                    // if (property) {
-                    //     try {
-                    //         alert("テキストの値: " + property.getValue());
-                    //         property.setValue("新しいテキスト");
-                    //     } catch (e) {
-                    //         alert("プロパティの設定に失敗しました: " + e.message);
-                    //     } 
-                    // }
-                }
-            }
-
-            // if (insertedMogrt.properties.length > 3) {
-            //     insertedMogrt.properties[3].setValue("テロップの内容");
-            // } else {
-            //     alert("プロパティ[3]が存在しません。");
-            // }
-
-            // // mogrtのプロパティを設定
-            // var mogrtComponent = insertedMogrt.components[0];
-            // mogrtComponent.properties[3].setValue("テロップの内容");
-
-        } catch (e) {
-            alert("Mogrtのプロパティ変更に失敗しました: " + e.message);
-
-        }
-    } catch (e) {
-        alert("Mogrtの挿入に失敗しました: " + e.message);
-    }
+    var insertedMogrt = app.project.activeSequence.importMGT(filePath, getCurrentCTI().ticks, videoTrackNumber, 0);
     
+    showComponentsList(insertedMogrt);
+
+    var components = insertedMogrt.components;
+    for (var i = 0; i < components.numItems; i++) {
+        var comp = components[i];
+        // if (comp.displayName == "テキスト") {
+        alert("Comp No. " + i + "コンポーネント名: " + comp.displayName);    
+        // すべてのプロパティをalertで表示 (デバッグ用)
+            for (var j = 0; j < comp.properties.numItems; j++) {
+                alert("Comp No. " + i + " Prop No. " + j + "プロパティ名: " + comp.properties[j].displayName + " プロパティの値: " + comp.properties[j].getValue());
+            }
+    }
 }
 
 
 // // クリップを特定する関数
-// function findInsertedClip(trackNumber, startTime) {
-//     var track = app.project.activeSequence.videoTracks[trackNumber];
-//     var clips = track.clips;
+function findInsertedClip(trackNumber, startTime) {
+    var track = app.project.activeSequence.videoTracks[trackNumber];
+    var clips = track.clips;
 
-//     for (var i = 0; i < clips.numItems; i++) {
-//         var clip = clips[i];
-//         if (clip.start.ticks === startTime) {
-//             return clip;
-//         }
-//     }
+    for (var i = 0; i < clips.numItems; i++) {
+        var clip = clips[i];
+        if (clip.start.ticks === startTime) {
+            return clip;
+        }
+    }
 
-//     alert("挿入したクリップが見つかりませんでした。");
-//     return null;
-// }
+    alert("挿入したクリップが見つかりませんでした。");
+    return null;
+}
 
 
 // アラートを表示する関数 main.jsから呼び出す用
