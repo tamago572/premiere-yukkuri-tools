@@ -2,23 +2,29 @@
 /*global $, Folder*/
 
 // これがメインの関数
-function insertAudioAndTitle(filePath, audioTrackNumber, videoTrackNumber) {
+function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER) {
 
     // プロジェクトにファイルをインポート
-    importFilesToRoot(filePath);
+    importFilesToRoot(AUDIO_FILEPATH);
 
-    // インポートしたアイテムを取得
-    var importedItem = findImportedItem(filePath);
+    // インポートしたアイテム(音声ファイル)を取得
+    var IMPORTED_ITEM = findImportedItem(AUDIO_FILEPATH); // ProjectItem形式
+
+    // インポートした音声ファイルの長さを計算
+    // var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().ticks - IMPORTED_ITEM.getInPoint().ticks;
+    var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().ticks;
+
+    alert("音声ファイルの長さ: " + AUDIO_DURATION);
 
     // インポートしたアイテムが存在するか
-    if (importedItem) {
+    if (IMPORTED_ITEM) {
         var currentCTI = getCurrentCTI();
         var activeSequence = app.project.activeSequence;
 
         // オーディオトラックにクリップ (音声ファイル)を追加
         try {
             // クリップをシーケンスに配置 [1]はトラック番号 A1=0, A2=1...
-            activeSequence.audioTracks[audioTrackNumber].overwriteClip(importedItem, currentCTI.ticks);
+            activeSequence.audioTracks[AUDIO_TRACK_NUMBER].overwriteClip(IMPORTED_ITEM, currentCTI.ticks); // 返り値はboolean
         } catch (e) {
             alert("音声ファイルの挿入に失敗しました: " + e.message);
         }
@@ -33,16 +39,29 @@ function insertAudioAndTitle(filePath, audioTrackNumber, videoTrackNumber) {
         var insertedMogrt = null;
         // テロップを挿入
         try {
-            insertedMogrt = activeSequence.importMGT(mogrtFilePath, currentCTI.ticks, videoTrackNumber, 0);
+            insertedMogrt = activeSequence.importMGT(mogrtFilePath, currentCTI.ticks, VIDEO_TRACK_NUMBER, 0); // 返り値はtrackItem形式
         } catch (e) {
             alert("テロップの挿入に失敗しました: " + e.message);
+        }
+
+        // テロップの長さを音声ファイルの長さに合わせる
+        try {
+            alert("OutPointの値: " + insertedMogrt.end.seconds);
+            var MOGRT_DURATION = new Time();
+            MOGRT_DURATION.seconds = 30;
+            insertedMogrt.end.seconds = MOGRT_DURATION.seconds;
+            alert("OutPointの値: " + insertedMogrt.end.seconds);
+        } catch (e) {
+            alert("テロップのOutPointの設定に失敗しました: " + e.message);
         }
 
         // ソーステキストを設定
         try {
             var component = insertedMogrt.getMGTComponent();
-
+ 
             component.properties[0].setValue("新しいテキスト");
+
+            insertedMogrt.name = "新しいテキスト";
 
         } catch (e) {
             alert("ソーステキストの設定に失敗しました: " + e.message);
