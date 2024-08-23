@@ -33,40 +33,52 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
         // ビデオトラックにMogrtを追加
         // var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\エクステンション用テスト.mogrt";
         var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\琴葉葵字幕_凸版文久ゴシック.mogrt";
+        // var mogrtFilePath = "C:\\Users\\7f7fn\\Videos\\教育教育教育死刑死刑死刑.mp4";
+        // showMogrtPropList(mogrtFilePath, 0); // debug
+        var MGTnodeId = "000f4241";
 
-        // showMogrtPropList(mogrtFilePath, 0);
+        var mogrt = null;
 
-        var insertedMogrt = null;
-        // テロップを挿入
+        // mogrtをProjectItemから検索
         try {
-            insertedMogrt = activeSequence.importMGT(mogrtFilePath, currentCTI.ticks, VIDEO_TRACK_NUMBER, 0); // 返り値はtrackItem形式
+            mogrt = findImportedItemWithNodeID(MGTnodeId);
+
+            // mogrtが見つからなかった場合
+            if (!mogrt) {
+                throw new Error("mogrtファイルが見つかりませんでした。NodeIDが存在するか確認してください。");
+            }
+
+            alert("mogrtファイルの検索に成功しました。");
         } catch (e) {
-            alert("テロップの挿入に失敗しました: " + e.message);
+            alert("mogrtファイルの検索に失敗しました: " + e.message);
         }
 
-        // テロップの長さを音声ファイルの長さに合わせる
+        // 検索したmogrtのOutPointを設定
         try {
-            alert("OutPointの値: " + insertedMogrt.end.seconds);
-            var newOutPoint = insertedMogrt.inPoint.seconds + 2.0;
-            
-            insertedMogrt.end = newOutPoint;
-            // insertedMogrt.end = insertedMogrt.OutPoint - 100.0;
-            alert("OutPointの値: " + insertedMogrt.end.seconds);
+            mogrt.setOutPoint(AUDIO_DURATION, 4);
         } catch (e) {
-            alert("テロップのOutPointの設定に失敗しました: " + e.message);
+            alert("mogrtのOutPointの設定に失敗しました: " + e.message);
         }
 
-        // ソーステキストを設定
+        // mogrtをシーケンスに配置
         try {
-            var component = insertedMogrt.getMGTComponent();
+            activeSequence.videoTracks[VIDEO_TRACK_NUMBER].overwriteClip(mogrt, currentCTI.ticks);
+        } catch (e) {
+            alert("mogrtの挿入に失敗しました: " + e.message);
+        }
+
+
+        // // ソーステキストを設定
+        // try {
+        //     var component = insertedMogrt.getMGTComponent();
  
-            component.properties[0].setValue(SUBTITLE_TEXT);
+        //     component.properties[0].setValue(SUBTITLE_TEXT);
 
-            insertedMogrt.name = SUBTITLE_TEXT;
+        //     insertedMogrt.name = SUBTITLE_TEXT;
 
-        } catch (e) {
-            alert("ソーステキストの設定に失敗しました: " + e.message);
-        }
+        // } catch (e) {
+        //     alert("ソーステキストの設定に失敗しました: " + e.message);
+        // }
 
     } else {
         alert("インポートしたアイテムが見つかりませんでした。");
@@ -109,13 +121,14 @@ function importFilesToRoot(filePath) {
     var importedFilesResult = app.project.importFiles([filePath], true, app.project.rootItem, false);
 
     if (importedFilesResult) {
-        // alert("ファイルのインポートに成功しました。importedFilesの内容: " + importedFilesResult);
+        return importedFilesResult;
     } else {
         alert("ファイルのインポートに失敗しました。importedFilesの内容: " + importedFiles);
+        return null;
     }
 }
 
-// インポートしたアイテムを取得(探す)関数
+// インポートしたアイテムを取得(探す)関数 返り値はProjectItem形式
 function findImportedItem(filePath) {
     // ルートアイテムを取得
     var projectItems = app.project.rootItem.children;
@@ -128,6 +141,43 @@ function findImportedItem(filePath) {
             // ファイルパスが一致する場合
             if (item.getMediaPath() === filePath) {
                 return item;
+            }
+        }
+    }
+    return null;
+}
+
+
+// インポートしたアイテムをNodeIDを使用して探す関数 返り値はProjectItem形式 (BIN内のアイテムも探索)
+function findImportedItemWithNodeID(nodeId) {
+    // alert("渡されたNodeID: " + nodeId);
+
+    // ルートアイテムを取得
+    var projectItems = app.project.rootItem.children;
+
+    // ルートアイテムの子アイテムを探索
+    for (var i = 0; i < projectItems.numItems; i++) {
+        // クリップまたはファイルの場合
+        var item = projectItems[i];
+        // alert("NodeID: " + item.nodeId + " FilePath: " + item.getMediaPath());
+        
+        // ファイルパスが一致する場合
+        if (item.nodeId === nodeId) {
+            return item[i];
+        }
+        // BINの場合、子アイテムを検索
+        if (item.type === ProjectItemType.BIN) {
+            // alert("BIN: " + item.nodeId);
+            
+            for (var j = 0; j < item.children.numItems; j++) {
+                var binItem = item.children[j];
+
+                alert("NodeID: " + binItem.nodeId + " FilePath: " + binItem.getMediaPath());
+
+                if (binItem.nodeId === nodeId) {
+                    // alert("これだわ");
+                    return binItem;
+                }
             }
         }
     }
@@ -191,4 +241,13 @@ function showComponentsList(targetClip) {
         }
     }
     alert(componentsList);
+}
+
+function importMGTtoProj(mogrtFilePath) {
+    try {
+        insertedMogrt = app.project.activeSequence.importMGT(mogrtFilePath, getCurrentCTI().ticks, 1, 0); // 返り値はtrackItem形式
+        return insertedMogrt;
+    } catch (e) {
+        alert("テロップの挿入に失敗しました: " + e.message);
+    }
 }
