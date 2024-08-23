@@ -14,7 +14,7 @@
     <div class="dragArea section" id="dragArea">
         <div>
             <span id="dragAreaText">ここに音声ファイルをD&D</span><br>
-            <span>.wav/.mp3</span>
+            <span>*.wav</span>
         </div>
     </div>
 
@@ -52,18 +52,14 @@
         <span style="font-size: 16px;">A</span><input type="number" name="audio_layer_id" id="audio_layer_id" placeholder="2" value="2" min="1">
     </div>
 
-    <div>
-        <button id="btn_test" class="topcoat-button--large hostFontSize">Call ExtendScript</button>
-    </div>
-
-    
+  
 
     <!-- These are debugging shortcuts.  Class debuglink items only appear in debug mode  -->
     <span class="debuglink" id="reload">Reload</span>
     <span class="debuglink" id="debug">Debug</span>
     <span class="debuglink" id="sources">Sources</span>
 
-    <button onclick="location.reload();">[デバッグ用]リロード</button>
+    <button class="debuglink" onclick="location.reload();">[デバッグ用]リロード</button>
 
     <script src="js/libs/CSInterface.js"></script>
     <script src="js/libs/jquery-2.0.2.min.js"></script>

@@ -11,8 +11,8 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
     var IMPORTED_ITEM = findImportedItem(AUDIO_FILEPATH); // ProjectItem形式
 
     // インポートした音声ファイルの長さを計算
-    // var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().ticks - IMPORTED_ITEM.getInPoint().ticks;
-    var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().ticks;
+    var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().seconds - IMPORTED_ITEM.getInPoint().seconds;
+    // var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().ticks;
 
     alert("音声ファイルの長さ: " + AUDIO_DURATION);
 
@@ -46,10 +46,12 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
 
         // テロップの長さを音声ファイルの長さに合わせる
         try {
+            insertedMogrt = activeSequence.videoTracks[1].clips[0];
             alert("OutPointの値: " + insertedMogrt.end.seconds);
-            var MOGRT_DURATION = new Time();
-            MOGRT_DURATION.seconds = 30;
-            insertedMogrt.end.seconds = MOGRT_DURATION.seconds;
+            var newOutPoint = insertedMogrt.inPoint.seconds + 2.0;
+            
+            insertedMogrt.end = newOutPoint;
+            // insertedMogrt.end = insertedMogrt.OutPoint - 100.0;
             alert("OutPointの値: " + insertedMogrt.end.seconds);
         } catch (e) {
             alert("テロップのOutPointの設定に失敗しました: " + e.message);
@@ -70,10 +72,6 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
     } else {
         alert("インポートしたアイテムが見つかりませんでした。");
     }
-}
-
-function testbtn() {
-    alert("ゆっくりしていってね！！！");
 }
 
 

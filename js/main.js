@@ -1,9 +1,11 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global $, window, location, CSInterface, SystemPath, themeManager*/
 
+
 (function () {
     'use strict';
-
+    // const fs = require("fs");
+    
     var csInterface = new CSInterface();
 
     function init() {
@@ -72,8 +74,16 @@
             // ファイルパスのバックスラッシュをエスケープ
             filePath = filePath.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
 
-            // showAlert(filePath);
+            // テキストファイルを検索
 
+            // wavかmp3かを判定
+            const audioFileExt = filePath.extname(filePath);
+            showAlert(audioFileExt);
+            const textFilePath = filePath.replace('.wav', '.txt');
+
+
+
+            // 音声、テロップの挿入
             csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id})`);
 
         }
