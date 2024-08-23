@@ -76,15 +76,11 @@
 
             // テキストファイルを検索
 
-            // wavかmp3かを判定
-            const audioFileExt = filePath.extname(filePath);
-            showAlert(audioFileExt);
-            const textFilePath = filePath.replace('.wav', '.txt');
+            const subtitle_text = "挿入されるテキスト"; // 字幕のテキスト
 
-
-
+        
             // 音声、テロップの挿入
-            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id})`);
+            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}")`);
 
         }
 
