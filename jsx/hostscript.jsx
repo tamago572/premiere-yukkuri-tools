@@ -2,7 +2,7 @@
 /*global $, Folder*/
 
 // これがメインの関数
-function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT) {
+function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID) {
 
     // プロジェクトにファイルをインポート
     importFilesToRoot(AUDIO_FILEPATH);
@@ -11,10 +11,8 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
     var IMPORTED_ITEM = findImportedItem(AUDIO_FILEPATH); // ProjectItem形式
 
     // インポートした音声ファイルの長さを計算
-    var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().seconds - IMPORTED_ITEM.getInPoint().seconds;
-    // var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().ticks;
-
-    alert("音声ファイルの長さ: " + AUDIO_DURATION);
+    // 音声ファイルの長さ = OutPoint - InPoint + ちょっと余裕を持たせる分 秒数
+    var AUDIO_DURATION = IMPORTED_ITEM.getOutPoint().seconds - IMPORTED_ITEM.getInPoint().seconds + SUBTITLE_DURATION_BUFFER;
 
     // インポートしたアイテムが存在するか
     if (IMPORTED_ITEM) {
@@ -31,17 +29,16 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
 
 
         // ビデオトラックにMogrtを追加
-        // var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\エクステンション用テスト.mogrt";
         var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\琴葉葵字幕_凸版文久ゴシック.mogrt";
-        // var mogrtFilePath = "C:\\Users\\7f7fn\\Videos\\教育教育教育死刑死刑死刑.mp4";
         // showMogrtPropList(mogrtFilePath, 0); // debug
-        var MGTnodeId = "000f4241";
+        
+        MGT_NODE_ID = "000f4241";
 
         var mogrt = null;
 
         // mogrtをProjectItemから検索
         try {
-            mogrt = findImportedItemWithNodeID(MGTnodeId);
+            mogrt = findImportedItemWithNodeID(MGT_NODE_ID);
 
             // mogrtが見つからなかった場合
             if (!mogrt) {
