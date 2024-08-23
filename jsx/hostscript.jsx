@@ -2,8 +2,9 @@
 /*global $, Folder*/
 
 // これがメインの関数
-function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID) {
 
+function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID) {
+try {
     // プロジェクトにファイルをインポート
     importFilesToRoot(AUDIO_FILEPATH);
 
@@ -31,8 +32,6 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
         // ビデオトラックにMogrtを追加
         var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\琴葉葵字幕_凸版文久ゴシック.mogrt";
         // showMogrtPropList(mogrtFilePath, 0); // debug
-        
-        MGT_NODE_ID = "000f4241";
 
         var mogrt = null;
 
@@ -64,22 +63,27 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
             alert("mogrtの挿入に失敗しました: " + e.message);
         }
 
+        // シーケンスに挿入したmogrtクリップを取得
+        insertedMogrt = findInsertedClip(VIDEO_TRACK_NUMBER, currentCTI.ticks);
 
-        // // ソーステキストを設定
-        // try {
-        //     var component = insertedMogrt.getMGTComponent();
+        // ソーステキストを設定
+        try {
+            var component = insertedMogrt.getMGTComponent();
  
-        //     component.properties[0].setValue(SUBTITLE_TEXT);
+            component.properties[0].setValue(SUBTITLE_TEXT);
 
-        //     insertedMogrt.name = SUBTITLE_TEXT;
+            insertedMogrt.name = SUBTITLE_TEXT;
 
-        // } catch (e) {
-        //     alert("ソーステキストの設定に失敗しました: " + e.message);
-        // }
+        } catch (e) {
+            alert("ソーステキストの設定に失敗しました: " + e.message);
+        }
 
     } else {
         alert("インポートしたアイテムが見つかりませんでした。");
     }
+} catch (e) {
+    alert("エラーが発生しました: " + e.message);
+}
 }
 
 
@@ -169,7 +173,7 @@ function findImportedItemWithNodeID(nodeId) {
             for (var j = 0; j < item.children.numItems; j++) {
                 var binItem = item.children[j];
 
-                alert("NodeID: " + binItem.nodeId + " FilePath: " + binItem.getMediaPath());
+                // alert("NodeID: " + binItem.nodeId + " FilePath: " + binItem.getMediaPath());
 
                 if (binItem.nodeId === nodeId) {
                     // alert("これだわ");
@@ -201,7 +205,7 @@ function showMogrtPropList(filePath, videoTrackNumber) {
 }
 
 
-// // クリップを特定する関数
+// // クリップを特定する関数 トラック番号と開始時間（CTI.ticks)を指定
 function findInsertedClip(trackNumber, startTime) {
     var track = app.project.activeSequence.videoTracks[trackNumber];
     var clips = track.clips;

@@ -65,22 +65,28 @@
 
             const audio_layer_id = document.getElementById("audio_layer_id").value - 1;
 
-            // const video_layer_id = document.getElementById("video_layer_id").value - 1;
+            // const video_layer_id = document.getElementById("video_layer_id").value - 1; // TODO: ビデオレイヤーの選択機能を追加
             const video_layer_id = 1;
 
             // Eventからファイルパスを取得
             let filePath = e.dataTransfer.files[0].path;
-
             // ファイルパスのバックスラッシュをエスケープ
             filePath = filePath.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
 
+
             // テキストファイルを検索
+            let subtitle_text = "挿入されるテキスト"; // 字幕のテキスト // TODO: テキストファイルから読み込む
 
-            const subtitle_text = "挿入されるテキスト"; // 字幕のテキスト
+            // プラスする字幕の表示時間(秒)
+            let subtitle_duration_buffer = 0.1; // TODO: HTMLから取得。変えられるようにする
 
+            // nodeIdを取得
+            let nodeId = "000f4241"; // TODO: HTMLから取得
         
             // 音声、テロップの挿入
-            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}")`);
+            // (AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID)
+            // 音声ファイルのパス, オーディオトラック番号, ビデオトラック番号, 字幕のテキスト, プラスする字幕の表示時間(秒), mogrtのNodeID
+            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}", ${subtitle_duration_buffer}, "${nodeId}")`);
 
         }
 
