@@ -2,7 +2,7 @@
 /*global $, Folder*/
 
 // これがメインの関数
-function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER) {
+function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT) {
 
     // プロジェクトにファイルをインポート
     importFilesToRoot(AUDIO_FILEPATH);
@@ -46,7 +46,6 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
 
         // テロップの長さを音声ファイルの長さに合わせる
         try {
-            insertedMogrt = activeSequence.videoTracks[1].clips[0];
             alert("OutPointの値: " + insertedMogrt.end.seconds);
             var newOutPoint = insertedMogrt.inPoint.seconds + 2.0;
             
@@ -61,9 +60,9 @@ function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUM
         try {
             var component = insertedMogrt.getMGTComponent();
  
-            component.properties[0].setValue("新しいテキスト");
+            component.properties[0].setValue(SUBTITLE_TEXT);
 
-            insertedMogrt.name = "新しいテキスト";
+            insertedMogrt.name = SUBTITLE_TEXT;
 
         } catch (e) {
             alert("ソーステキストの設定に失敗しました: " + e.message);
