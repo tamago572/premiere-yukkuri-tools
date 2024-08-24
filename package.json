@@ -2,7 +2,7 @@
   "name": "com.pote-sala.premiere-yukkuri-maker",
   "version": "1.0.0",
   "description": "Premiereで合成音声系動画の作成を効率化するエクステンション",
-  "main": "index.js",
+  "main": "js/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

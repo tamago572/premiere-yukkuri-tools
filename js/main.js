@@ -4,18 +4,19 @@
 
 (function () {
     'use strict';
-    // const fs = require("fs");
+
+    
     
     var csInterface = new CSInterface();
-
+    
     function init() {
-
+        
         themeManager.init();
-
+        
         const dragArea = document.getElementById('dragArea');
-
+        
         const dragAreaText = document.getElementById('dragAreaText');
-
+        
         // ドラッグエリアにファイルが乗っているときの処理
         dragArea.addEventListener("dragover", dragOver);
         // ドラッグエリアにファイルが乗っかってきたときの処理
@@ -75,14 +76,16 @@
 
 
             // テキストファイルを検索
-            let subtitle_text = "挿入されるテキスト"; // 字幕のテキスト // TODO: テキストファイルから読み込む
+            let subtitle_text = searchTextFile(filePath); // 字幕のテキスト // TODO: テキストファイルから読み込む
+            // let subtitle_text = "あああああああああああああああ"; // 字幕のテキスト // TODO: テキストファイルから読み込む
 
             // プラスする字幕の表示時間(秒)
             let subtitle_duration_buffer = 0.1; // TODO: HTMLから取得。変えられるようにする
 
-            // nodeIdを取得
-            const MGT_file_path = "C:\\Users\\7f7fn\\Documents\\Adobe\\Premiere Pro\\24.0\\テスト\\Motion Graphics Template Media\\ec324952-d483-4e45-afd9-c1aa2d5f29b4\\琴葉葵字幕_凸版文久ゴシック.aegraphic";
-        
+            // mogrtファイルのパス // TODO: HTMLから取得
+            let MGT_file_path = "C:\\Users\\7f7fn\\Documents\\Adobe\\Premiere Pro\\24.0\\テスト\\Motion Graphics Template Media\\ec324952-d483-4e45-afd9-c1aa2d5f29b4\\琴葉葵字幕_凸版文久ゴシック.aegraphic";
+            MGT_file_path = MGT_file_path.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
+
             // 音声、テロップの挿入
             // (AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID)
             // 音声ファイルのパス, オーディオトラック番号, ビデオトラック番号, 字幕のテキスト, プラスする字幕の表示時間(秒), mogrtのNodeID
@@ -94,13 +97,74 @@
             csInterface.evalScript(`showAlert("${msg}")`);
         }
 
+        if (typeof require !== 'undefined') {
+            // showAlert("Node.js is available");
+        } else {
+            showAlert("Node.js is not available");
+        }
+
 
         $("#btn_test").click(function () {
             csInterface.evalScript('testbtn()');
         });
+    
+        
+        
+        function searchTextFile(audioFilePath) {
+            
+            try {
+                // テキストファイルのパスを取得
+                const textFilePath = audioFilePath.replace(".wav", ".txt");
+                // showAlert(textFilePath);
+
+                const fs = require('fs');
+                const fsPromises = require('fs/promises');
+
+                // テキストファイルが存在するかチェック 
+                if (fs.existsSync(textFilePath)) {
+                    alert("テキストファイルが見つかりました");
+                    // テキストファイルを読み込む
+                    // await fs.readFile(textFilePath, "utf-8", (err, data) => {
+                    //     if (err) {
+                    //         showAlert("テキストファイルの読み込み時にエラーが発生しました: " + err.message);
+                    //         return null;
+                    //     }
+                    //     showAlert("テキストファイルの読み込みに成功しました");
+                    //     showAlert(data);
+                    //     return data;
+                        
+                    // });
+
+                    const data = fs.readFileSync(textFilePath, "utf-8");
+                    if (data) {
+                        showAlert("テキストファイルの読み込みに成功しました");
+                        showAlert(data);
+                        return data;
+                    }
+                    return "テキストファイルが見つかりませんでした";
+                    //return data;
+                    // fs.readFile(textFilePath)
+                    //     .then(data => {
+                    //         showAlert("テキストファイルの読み込みに成功しました");
+                    //         showAlert(data);
+                    //         return data;
+                    //     })
+                    //     .catch(err => {
+                    //         showAlert("テキストファイルの読み込み時にエラーが発生しました: " + err.message);
+                    //         return null;
+                    //     });
+
+                    
+                } else {
+                    return "テキストファイルが見つかりませんでした";
+                }
+            } catch (e) {
+                showAlert("テキストファイルの取得時にエラーが発生しました: " + e.message);
+            }
+        }
+        
     }
-
+    
     init();
-
+    
 }());
-
