@@ -3,7 +3,7 @@
 
 // これがメインの関数
 
-function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID) {
+function insertAudioAndTitle(AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_FILE_PATH) {
 try {
     // プロジェクトにファイルをインポート
     importFilesToRoot(AUDIO_FILEPATH);
@@ -30,14 +30,15 @@ try {
 
 
         // ビデオトラックにMogrtを追加
-        var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\琴葉葵字幕_凸版文久ゴシック.mogrt";
+        // var mogrtFilePath = "C:\\Users\\7f7fn\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\琴葉葵字幕_凸版文久ゴシック.mogrt";
         // showMogrtPropList(mogrtFilePath, 0); // debug
 
         var mogrt = null;
 
         // mogrtをProjectItemから検索
         try {
-            mogrt = findImportedItemWithNodeID(MGT_NODE_ID);
+            // mogrt = findImportedItemWithNodeID(MGT_NODE_ID);
+            mogrt = findImportedMGT(MGT_FILE_PATH);
 
             // mogrtが見つからなかった場合
             if (!mogrt) {
@@ -142,6 +143,30 @@ function findImportedItem(filePath) {
             // ファイルパスが一致する場合
             if (item.getMediaPath() === filePath) {
                 return item;
+            }
+        }
+    }
+    return null;
+}
+
+function findImportedMGT(filePath) {
+    // ルートアイテムを取得
+    var projectItems = app.project.rootItem.children;
+
+    // ルートアイテムの子アイテムを探索
+    for (var i = 0; i < projectItems.numItems; i++) {
+        // クリップまたはファイルの場合
+        var item = projectItems[i];
+    
+        // BINの場合、子アイテムを検索
+        if (item.type === ProjectItemType.BIN) {            
+            for (var j = 0; j < item.children.numItems; j++) {
+                var binItem = item.children[j];
+
+                if (binItem.getMediaPath() === filePath) {
+                    // alert("これだわ");
+                    return binItem;
+                }
             }
         }
     }

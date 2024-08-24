@@ -81,12 +81,12 @@
             let subtitle_duration_buffer = 0.1; // TODO: HTMLから取得。変えられるようにする
 
             // nodeIdを取得
-            let nodeId = "000f4241"; // TODO: HTMLから取得
+            const MGT_file_path = "C:\\Users\\7f7fn\\Documents\\Adobe\\Premiere Pro\\24.0\\テスト\\Motion Graphics Template Media\\ec324952-d483-4e45-afd9-c1aa2d5f29b4\\琴葉葵字幕_凸版文久ゴシック.aegraphic";
         
             // 音声、テロップの挿入
             // (AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID)
             // 音声ファイルのパス, オーディオトラック番号, ビデオトラック番号, 字幕のテキスト, プラスする字幕の表示時間(秒), mogrtのNodeID
-            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}", ${subtitle_duration_buffer}, "${nodeId}")`);
+            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}", ${subtitle_duration_buffer}, "${MGT_file_path}")`);
 
         }
 
