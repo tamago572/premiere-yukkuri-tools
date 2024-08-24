@@ -63,16 +63,16 @@
             dragArea.classList.remove('dragging');
             dragAreaText.textContent = 'ドロップで字幕を挿入';
 
-            const audio_layer_id = document.getElementById("audio_layer_id").value - 1;
-
-            // const video_layer_id = document.getElementById("video_layer_id").value - 1; // TODO: ビデオレイヤーの選択機能を追加
-            const video_layer_id = 1;
-
+            
             // Eventからファイルパスを取得
             let filePath = e.dataTransfer.files[0].path;
             // ファイルパスのバックスラッシュをエスケープ
             filePath = filePath.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
+            
+            const audio_layer_id = document.getElementById("audio_layer_id").value - 1;
 
+            // const video_layer_id = document.getElementById("video_layer_id").value - 1; // TODO: ビデオレイヤーの選択機能を追加
+            const video_layer_id = 1;
 
             // テキストファイルを検索
             let subtitle_text = "挿入されるテキスト"; // 字幕のテキスト // TODO: テキストファイルから読み込む
