@@ -75,8 +75,7 @@ const iconv = require('iconv-lite');
 
 
             // テキストファイルを検索
-            let subtitle_text = searchTextFile(filePath); // 字幕のテキスト // TODO: テキストファイルから読み込む
-            // let subtitle_text = "あああああああああああああああ"; // 字幕のテキスト // TODO: テキストファイルから読み込む
+            let subtitle_text = searchTextFile(filePath); // 字幕のテキスト テキストファイルから読み込む
 
             // プラスする字幕の表示時間(秒)
             let subtitle_duration_buffer = 0.1; // TODO: HTMLから取得。変えられるようにする
