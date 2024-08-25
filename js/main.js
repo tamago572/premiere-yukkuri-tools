@@ -1,12 +1,11 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global $, window, location, CSInterface, SystemPath, themeManager*/
-
+const fs = require('fs');
+const iconv = require('iconv-lite');
 
 (function () {
     'use strict';
 
-    
-    
     var csInterface = new CSInterface();
     
     function init() {
@@ -82,14 +81,22 @@
             // プラスする字幕の表示時間(秒)
             let subtitle_duration_buffer = 0.1; // TODO: HTMLから取得。変えられるようにする
 
-            // mogrtファイルのパス // TODO: HTMLから取得
-            let MGT_file_path = "C:\\Users\\7f7fn\\Documents\\Adobe\\Premiere Pro\\24.0\\テスト\\Motion Graphics Template Media\\ec324952-d483-4e45-afd9-c1aa2d5f29b4\\琴葉葵字幕_凸版文久ゴシック.aegraphic";
-            MGT_file_path = MGT_file_path.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
-
-            // 音声、テロップの挿入
-            // (AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID)
-            // 音声ファイルのパス, オーディオトラック番号, ビデオトラック番号, 字幕のテキスト, プラスする字幕の表示時間(秒), mogrtのNodeID
-            csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}", ${subtitle_duration_buffer}, "${MGT_file_path}")`);
+            // mogrtファイルのパス
+            let MGT_file_path = document.getElementById("select_mogrt_file").value;
+            
+            if (fs.existsSync(MGT_file_path)) {
+                MGT_file_path = MGT_file_path.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
+    
+                // 音声、テロップの挿入
+                // (AUDIO_FILEPATH, AUDIO_TRACK_NUMBER, VIDEO_TRACK_NUMBER, SUBTITLE_TEXT, SUBTITLE_DURATION_BUFFER, MGT_NODE_ID)
+                // 音声ファイルのパス, オーディオトラック番号, ビデオトラック番号, 字幕のテキスト, プラスする字幕の表示時間(秒), mogrtのNodeID
+                csInterface.evalScript(`insertAudioAndTitle("${filePath}", ${audio_layer_id}, ${video_layer_id}, "${subtitle_text}", ${subtitle_duration_buffer}, "${MGT_file_path}")`);
+                
+            } else {
+                showAlert("MGTが見つかりませんでした。正しいパスを選択しているか確認してください");
+                return;
+            }
+            
 
         }
 
@@ -116,12 +123,8 @@
                 // テキストファイルのパスを取得
                 const textFilePath = audioFilePath.replace(".wav", ".txt");
 
-                const fs = require('fs');
-                const iconv = require('iconv-lite');
-
                 // テキストファイルが存在するかチェック 
                 if (fs.existsSync(textFilePath)) {
-                    alert("テキストファイルが見つかりました");
                     // テキストファイルを読み込む
                     const data = fs.readFileSync(textFilePath);
                     if (data) {
