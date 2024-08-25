@@ -127,7 +127,7 @@
                     if (data) {
                         const buffer = new Buffer(data, "binary");
                         let text = iconv.decode(buffer, "Shift_JIS"); // Shift_JISに変換
-                        text = text.replace("\r\n", ""); // 改行コード(LF)を削除
+                        text = text.replace("\r\n", ""); // 改行コード(CR+LF)を削除
                         
                         return text;
                     }
