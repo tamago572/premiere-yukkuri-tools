@@ -24,16 +24,26 @@
         <h2>.mogrtファイルの指定</h2>
         <p>シーケンスに配置される字幕を決めます。</p>
 
-        <select name="mogrt_file" id="mogrt_file">
+        <select name="mogrt_file" id="select_mogrt_file">
             <option value="desc">--.mogrtファイルを選択--</option>
             <option value="first">example.mogrt</option>
         </select>
         
         <h2>.mogrtファイルの追加</h2>
         <p>シーケンスに配置する字幕の種類を追加します。</p>
+        
+        <input type="text" name="mogrt_input_file" id="add_mogrt_file">
+        <input type="button" value="追加" id="add_mogrt_file_submit">
+        
+        <h2>.mogrtファイルの削除</h2>
+        <p>追加した.mogrtを登録解除します</p>
 
-        <input type="file" name="mogrt_input_file" id="mogrt_input_file">
-        <input type="button" value="追加">
+        <select name="mogrt_file" id="delete_mogrt_file">
+            <option value="desc">--.mogrtファイルを選択--</option>
+            <option value="first">example.mogrt</option>
+        </select>
+        <input type="button" value="削除" id="delete_mogrt_file_submit">
+
     </div>
     
     <div class="generate-yukkuri-voices-area section" id="generate_yukkuri_voices_area">
@@ -67,7 +77,7 @@
     <script src="js/themeManager.js"></script>
     <script src="js/main.js"></script>
 
-    <script src="js/nodeserver.js"></script>
+    <script src="js/save_settings.js"></script>
 
     <button onclick="readfs()">ファイル リスト</button>
 </body>
