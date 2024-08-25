@@ -115,46 +115,24 @@
             try {
                 // テキストファイルのパスを取得
                 const textFilePath = audioFilePath.replace(".wav", ".txt");
-                // showAlert(textFilePath);
 
                 const fs = require('fs');
-                const fsPromises = require('fs/promises');
+                const iconv = require('iconv-lite');
 
                 // テキストファイルが存在するかチェック 
                 if (fs.existsSync(textFilePath)) {
                     alert("テキストファイルが見つかりました");
                     // テキストファイルを読み込む
-                    // await fs.readFile(textFilePath, "utf-8", (err, data) => {
-                    //     if (err) {
-                    //         showAlert("テキストファイルの読み込み時にエラーが発生しました: " + err.message);
-                    //         return null;
-                    //     }
-                    //     showAlert("テキストファイルの読み込みに成功しました");
-                    //     showAlert(data);
-                    //     return data;
-                        
-                    // });
-
-                    const data = fs.readFileSync(textFilePath, "utf-8");
+                    const data = fs.readFileSync(textFilePath);
                     if (data) {
-                        showAlert("テキストファイルの読み込みに成功しました");
-                        showAlert(data);
-                        return data;
+                        const buffer = new Buffer(data, "binary");
+                        let text = iconv.decode(buffer, "Shift_JIS"); // Shift_JISに変換
+                        text = text.replace("\r\n", ""); // 改行コード(LF)を削除
+                        
+                        return text;
                     }
                     return "テキストファイルが見つかりませんでした";
-                    //return data;
-                    // fs.readFile(textFilePath)
-                    //     .then(data => {
-                    //         showAlert("テキストファイルの読み込みに成功しました");
-                    //         showAlert(data);
-                    //         return data;
-                    //     })
-                    //     .catch(err => {
-                    //         showAlert("テキストファイルの読み込み時にエラーが発生しました: " + err.message);
-                    //         return null;
-                    //     });
-
-                    
+                                        
                 } else {
                     return "テキストファイルが見つかりませんでした";
                 }
