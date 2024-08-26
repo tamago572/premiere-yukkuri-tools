@@ -1,5 +1,5 @@
 {
-  "name": "com.pote-sala.premiere-yukkuri-maker",
+  "name": "com.pote-sala.premiere-yukkuri-tools",
   "version": "1.0.0",
   "description": "Premiereで合成音声系動画の作成を効率化するエクステンション",
   "main": "js/main.js",

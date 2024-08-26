@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="9.0" ExtensionBundleId="com.pote-sala.premiere-yukkuri-maker" ExtensionBundleVersion="1.0.0"
-		ExtensionBundleName="Premiere Yukkuri Maker" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest Version="9.0" ExtensionBundleId="com.pote-sala.premiere-yukkuri-tools" ExtensionBundleVersion="1.0.0"
+		ExtensionBundleName="Premiere Yukkuri Tools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="com.pote-sala.premiere-yukkuri-maker" Version="1.0.0" />
+		<Extension Id="com.pote-sala.premiere-yukkuri-tools" Version="1.0.0" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
@@ -51,7 +51,7 @@
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
-		<Extension Id="com.pote-sala.premiere-yukkuri-maker">
+		<Extension Id="com.pote-sala.premiere-yukkuri-tools">
 			<DispatchInfo >
 				<Resources>
 				<MainPath>./index.html</MainPath>
@@ -65,7 +65,7 @@
 				</Lifecycle>
 				<UI>
 					<Type>Panel</Type>
-					<Menu>Premiere Yukkuri Maker</Menu>
+					<Menu>Premiere Yukkuri Tools</Menu>
 					<Geometry>
 						<Size>
 							<Height>300</Height>
