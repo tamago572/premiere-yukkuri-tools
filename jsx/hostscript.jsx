@@ -45,7 +45,6 @@ try {
                 throw new Error("mogrtファイルが見つかりませんでした。NodeIDが存在するか確認してください。");
             }
 
-            alert("mogrtファイルの検索に成功しました。");
         } catch (e) {
             alert("mogrtファイルの検索に失敗しました: " + e.message);
         }
@@ -78,6 +77,8 @@ try {
         } catch (e) {
             alert("ソーステキストの設定に失敗しました: " + e.message);
         }
+
+        activeSequence.setPlayerPosition((insertedMogrt.end).ticks)
 
     } else {
         alert("インポートしたアイテムが見つかりませんでした。");
