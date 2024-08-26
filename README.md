@@ -1,4 +1,4 @@
-# Premiere-Yukkuri-Maker
+# Premiere-Yukkuri-Tools
 
 ドラッグアンドドロップだけで音声の配置・タイトルの挿入が出来るようになるエクステンションです。
 
