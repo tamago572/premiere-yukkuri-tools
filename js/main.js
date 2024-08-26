@@ -65,8 +65,7 @@ const iconv = require('iconv-lite');
 
             const audio_layer_id = document.getElementById("audio_layer_id").value - 1;
 
-            // const video_layer_id = document.getElementById("video_layer_id").value - 1; // TODO: ビデオレイヤーの選択機能を追加
-            const video_layer_id = 1;
+            const video_layer_id = document.getElementById("video_layer_id").value - 1;
 
             // Eventからファイルパスを取得
             let filePath = e.dataTransfer.files[0].path;
@@ -78,7 +77,7 @@ const iconv = require('iconv-lite');
             let subtitle_text = searchTextFile(filePath); // 字幕のテキスト テキストファイルから読み込む
 
             // プラスする字幕の表示時間(秒)
-            let subtitle_duration_buffer = 0.1; // TODO: HTMLから取得。変えられるようにする
+            let subtitle_duration_buffer = document.getElementById("buffer").value;
 
             // mogrtファイルのパス
             let MGT_file_path = document.getElementById("select_mogrt_file").value;

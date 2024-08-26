@@ -18,6 +18,7 @@
         </div>
     </div>
 
+    <h1>設定</h1>
     <div class="section">
         <h1>字幕設定</h1>
         
@@ -30,7 +31,7 @@
         </select>
         
         <h2>.mogrtファイルの追加</h2>
-        <p>シーケンスに配置する字幕の種類を追加します。</p>
+        <p>シーケンスに配置する字幕の種類を追加します。ファイルパスを入力します。</p>
         
         <input type="text" name="mogrt_input_file" id="add_mogrt_file">
         <input type="button" value="追加" id="add_mogrt_file_submit">
@@ -46,7 +47,7 @@
 
     </div>
     
-    <div class="generate-yukkuri-voices-area section" id="generate_yukkuri_voices_area">
+    <!-- <div class="generate-yukkuri-voices-area section" id="generate_yukkuri_voices_area">
         <h1>音声合成</h1>
         <p>※Windowsのみ対応</p>
         <input type="text" name="aqplayer" id="aqplayer" class="aqarea aqtxtarea" placeholder="AquesTalkPlayer.exeのパス">
@@ -54,15 +55,22 @@
             <textarea name="aqtxt" id="aqtxt" class="aqarea aqtxtarea" placeholder="ゆっくりに喋らせるセリフを入力"></textarea>
             <input type="button" class="aqarea" value="生成" id="aqgenbtn">
         </div>
+    </div> -->
+
+    <div class="section">
+        <h1>レイヤー設定</h1>
+        <h2>テロップ</h2>
+        <span style="font-size: 15px;">V</span><input type="number" name="video_layer_id" id="video_layer_id" placeholder="2" value="2" min="1">
+        <h2>音声ファイル</h2>
+        <span style="font-size: 15px;">A</span><input type="number" name="audio_layer_id" id="audio_layer_id" placeholder="2" value="2" min="1">
     </div>
 
     <div class="section">
-        <h1>音声ファイル配置設定</h1>
-        <p>音声ファイルを配置するレイヤーを設定します</p>
-        <span style="font-size: 16px;">A</span><input type="number" name="audio_layer_id" id="audio_layer_id" placeholder="2" value="2" min="1">
+        <h1>配置設定</h1>
+        <h2>バッファ</h2>
+        <p>音声ファイル+n秒テロップを伸ばします</p>
+        <input type="number" name="buffer" id="buffer" placeholder="0.1" value="0.1" min="0">秒
     </div>
-
-  
 
     <!-- These are debugging shortcuts.  Class debuglink items only appear in debug mode  -->
     <span class="debuglink" id="reload">Reload</span>
@@ -78,7 +86,5 @@
     <script src="js/main.js"></script>
 
     <script src="js/save_settings.js"></script>
-
-    <button onclick="readfs()">ファイル リスト</button>
 </body>
 </html>
