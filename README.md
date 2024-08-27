@@ -6,7 +6,11 @@
 
 テロップは、音声ファイルと同名のテキストファイルの中身が参照されます。なので、上記のソフト以外にも、音声書き出し時にテキストファイルが生成されれば、本エクステンションを使うことができます。
 
-Windows、macOSで動作します。Windows10 64bit 22H2、macOS Sonoma 14.5、Premiere Pro 24.6.0で動作確認済みです。
+Windows、macOSで動作します。Windows10 64bit 22H2、macOS Sonoma 14.5、どちらもPremiere Pro 24.6.0で動作確認済みです。
+
+本リポジトリのReleaseから[ダウンロード](https://github.com/tamago572/premiere-yukkuri-tools/releases/latest)することができます。
+
+`ZXP/UXP Installer`等を利用し、インストールしてください。
 
 <!-- また、AquesTalk Playerを使用することで、音声の作成・配置・挿入をPremiere Pro内で完結させることが出来ます。
 
