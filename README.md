@@ -6,15 +6,13 @@
 
 テロップは、音声ファイルと同名のテキストファイルの中身が参照されます。なので、上記のソフト以外にも、音声書き出し時にテキストファイルが生成されれば、本エクステンションを使うことができます。
 
+Windows、macOSで動作します。Windows10 64bit 22H2、macOS Sonoma 14.5、Premiere Pro 24.6.0で動作確認済みです。
+
 <!-- また、AquesTalk Playerを使用することで、音声の作成・配置・挿入をPremiere Pro内で完結させることが出来ます。
 
 但し、AquesTalkのライセンスに従ってご利用ください。 -->
 
 ## 注意
-
-- 現時点ではWindowsでしか動かないと思われます。(改行コードをCR+LFで処理しているため) 今後対応予定。
-
-- 現時点ではShift-JISのテキストファイルにしか対応していません。(VOICEROID/VOXは対応しています。他はソフトによります) 今後対応予定。
 
 - .mogrtファイルには、After Effectsで作成されたmogrtを使用する必要があります。
 
@@ -34,7 +32,7 @@ After Effectsを使用できない場合、Releasesからサンプルmogrtをダ
 ### macOS
 
 - VOICEVOX
-- MYukkuriVoice (Aquestalk ゆっくり) 今後対応予定
+- MYukkuriVoice (Aquestalk ゆっくり)
 
 ## メモ
 ```
