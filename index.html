@@ -72,6 +72,26 @@
         <input type="number" name="buffer" id="buffer" placeholder="0.1" value="0.1" min="0">秒
     </div>
 
+    <div class="section">
+        <h1>読み込み設定</h1>
+        <h2>文字コード</h2>
+        <p>テキストファイルの文字コードを設定します</p>
+
+        <select name="charactor_code" id="charactor_code">
+            <option value="0">Shift-JIS</option>
+            <option value="1">UTF-8</option>
+        </select>
+
+        <h2>改行コード</h2>
+        <p>テキストファイルの文字コードを設定します。WindowsではCR+LF、macOSではLFが一般的です。</p>
+
+        <select name="nl_code" id="nl_code">
+            <option value="0">CR+LF</option>
+            <option value="1">LF</option>
+        </select>
+    
+    </div>
+
     <!-- These are debugging shortcuts.  Class debuglink items only appear in debug mode  -->
     <span class="debuglink" id="reload">Reload</span>
     <span class="debuglink" id="debug">Debug</span>
@@ -86,5 +106,6 @@
     <script src="js/main.js"></script>
 
     <script src="js/save_settings.js"></script>
+    <script src="js/init.js"></script>
 </body>
 </html>

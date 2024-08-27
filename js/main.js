@@ -73,8 +73,11 @@ const iconv = require('iconv-lite');
             filePath = filePath.replace(/\\/g, '\\\\'); // バックスラッシュをダブルバックスラッシュに変換
 
 
+            const charactorCode = document.getElementById("charactor_code").value; // 文字コード 1: Shift_JIS, 2: UTF-8
+            const nl_code = document.getElementById("nl_code").value; // 改行コード 0: CR+LF, 1: LF
+
             // テキストファイルを検索
-            let subtitle_text = searchTextFile(filePath); // 字幕のテキスト テキストファイルから読み込む
+            let subtitle_text = searchTextFile(filePath, charactorCode, nl_code); // 字幕のテキスト テキストファイルから読み込む
 
             // プラスする字幕の表示時間(秒)
             let subtitle_duration_buffer = document.getElementById("buffer").value;
@@ -115,8 +118,11 @@ const iconv = require('iconv-lite');
     
         
         
-        function searchTextFile(audioFilePath) {
+        function searchTextFile(audioFilePath, charactorCode_index, nl_code_index) {
             
+            const charactorCodeList = ["Shift_JIS", "UTF-8"];
+            const nl_codeList = ["\r\n", "\n"]; // CR+LF: 0, LF: 1
+
             try {
                 // テキストファイルのパスを取得
                 const textFilePath = audioFilePath.replace(".wav", ".txt");
@@ -127,8 +133,9 @@ const iconv = require('iconv-lite');
                     const data = fs.readFileSync(textFilePath);
                     if (data) {
                         const buffer = new Buffer(data, "binary");
-                        let text = iconv.decode(buffer, "Shift_JIS"); // Shift_JISに変換
-                        text = text.replace("\r\n", ""); // 改行コード(CR+LF)を削除
+
+                        let text = iconv.decode(buffer, charactorCodeList[charactorCode_index]); // UTF-8に変換
+                        text = text.replace(nl_codeList[nl_code_index], ""); // 改行コード(CR+LF)を削除
                         
                         return text;
                     }
