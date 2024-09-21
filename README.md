@@ -32,6 +32,7 @@ After Effectsを使用できない場合、Releasesからサンプルmogrtをダ
 
 - A.I. Voice Editor (VOICEROID)
 - VOICEVOX
+- 棒読みちゃん（(Aquestalk)拡張機能必須）
 
 ### macOS
 
