@@ -6,6 +6,8 @@
 
 上記のソフト以外にも、音声書き出し時に`.txt`ファイルが生成されれば、本エクステンションに対応できます。
 
+![シーケンス 02 (1)](https://github.com/user-attachments/assets/246a26ab-ec89-43b2-80d6-6992e0cf7933)
+
 WindowsとmacOSで動作します。
 
 ## セットアップ・使い方
