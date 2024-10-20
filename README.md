@@ -1,24 +1,28 @@
 # Premiere-Yukkuri-Tools
 
-*2024-10-20追記: CEPのデバッグモードを有効化しないと動作しません。2024ではCEP11、2025ではCEP12のデバッグモードを有効化する必要があります。修正版をリリースするまでデバッグモードの有効化をお願いします*
-
----
-
 ドラッグアンドドロップだけで音声の配置・タイトルの挿入が出来るようになるエクステンションです。
 
 ゆっくり・VOICEROID・VOICEVOXを使用した動画の作成に役立つと思います。
 
-テロップは、音声ファイルと同名のテキストファイルの中身が参照されます。なので、上記のソフト以外にも、音声書き出し時にテキストファイルが生成されれば、本エクステンションを使うことができます。
+上記のソフト以外にも、音声書き出し時にテキストファイルが生成されれば、本エクステンションに対応できます。
 
-Windows、macOSで動作します。Windows10 64bit 22H2、macOS Sonoma 14.5、どちらもPremiere Pro 24.6.0で動作確認済みです。
+最近のPremiere Pro、Windows、macOSで動作します。
 
-本リポジトリのReleaseから[ダウンロード](https://github.com/tamago572/premiere-yukkuri-tools/releases/latest)することができます。
+本リポジトリのReleasesから[ダウンロード](https://github.com/tamago572/premiere-yukkuri-tools/releases/latest)できます。
 
 `ZXP/UXP Installer`等を利用し、インストールしてください。
 
 <!-- また、AquesTalk Playerを使用することで、音声の作成・配置・挿入をPremiere Pro内で完結させることが出来ます。
 
 但し、AquesTalkのライセンスに従ってご利用ください。 -->
+
+## 動作確認済み環境
+
+- Premiere Pro 2024, 2025
+- Windows10 22H2
+- macOS Sonoma 14.5
+
+最近のPremiere Proがインストールされていれば、動作すると思います。
 
 ## 注意
 
@@ -36,7 +40,7 @@ After Effectsを使用できない場合、Releasesからサンプルmogrtをダ
 
 - A.I. Voice Editor (VOICEROID)
 - VOICEVOX
-- 棒読みちゃん（(Aquestalk)拡張機能必須）
+- 棒読みちゃん（(Aquestalk) txt出力拡張機能必須）
 
 ### macOS
 
