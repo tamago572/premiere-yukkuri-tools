@@ -6,15 +6,45 @@
 
 上記のソフト以外にも、音声書き出し時に`.txt`ファイルが生成されれば、本エクステンションに対応できます。
 
-本リポジトリのReleasesから[ダウンロード](https://github.com/tamago572/premiere-yukkuri-tools/releases/latest)できます。
-
-[ZXP/UXP Installer](https://aescripts.com/learn/zxp-installer/)を利用し、インストールが可能です。
-
 最近のPremiere Pro、Windows、macOSで動作します。
 
-<!-- また、AquesTalk Playerを使用することで、音声の作成・配置・挿入をPremiere Pro内で完結させることが出来ます。
+## セットアップ・使い方
 
-但し、AquesTalkのライセンスに従ってご利用ください。 -->
+### 1. DL・インストール
+
+1. 本リポジトリのReleasesから[ダウンロード](https://github.com/tamago572/premiere-yukkuri-tools/releases/latest)します。
+
+2. [ZXP/UXP Installer](https://aescripts.com/learn/zxp-installer/)を利用し、インストールします。
+
+7. Premiere Proを開き、ウィンドウ → エクステンション → Premiere Yukkuri Tools を選択し、エクステンションを開きます。
+
+### 2. 字幕を追加する
+
+1. 字幕（`.mogrt`ファイル）を用意します。
+
+    AEでモーショングラフィックステンプレートを作成するか、サンプルのテンプレートを[ダウンロード](./mgts)します。
+
+2. Premiere Proのプロジェクトパネルに`.morgrt`ファイルをドラッグ&ドロップします。
+
+3. プロジェクトタブ内の「モーショングラフィックステンプレートメディア」フォルダを開きます。
+
+4. 追加したMGTファイルを右クリックします。
+
+5. 「エクスプローラーで表示」または「Finderで表示」をクリックします。
+
+6. 選択されている.aegraphicsファイルのパスをコピーします
+
+7. 「.mogrtファイルの追加」セクションから、テキストボックスにファイルパスをペーストし、追加をクリックします。
+
+### 3. 音声・テロップを配置する
+
+1. 「.mogrtファイルの指定」セクションから、配置する字幕の種類を選択します。
+
+2. お好みのソフトで.wavと.txtファイルを生成します。
+
+3. .wavファイルをエクステンションにドラッグ&ドロップします
+
+4. 音声と字幕が配置されます
 
 ## 動作確認済環境
 
