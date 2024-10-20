@@ -1,6 +1,6 @@
 # Premiere-Yukkuri-Tools
 
-*2024-10-20追記: Premiere Pro 2025では動作しません。対応版リリースまでPremiere Pro 2024以前をご使用いください。*
+*2024-10-20追記: Premiere Pro 2025では動作しません。対応版リリースまでPremiere Pro 2024以前をご使用ください。*
 
 ---
 
