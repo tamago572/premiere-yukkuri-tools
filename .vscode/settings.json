@@ -1,5 +1,4 @@
 {
-  "prettier.tabWidth": 2,
-  "prettier.useTabs": false,
-  "prettier.printWidth": 80
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // フォーマッターをPrettierにする
+  "editor.formatOnSave": true // ファイル保存時にフォーマットを実行
 }

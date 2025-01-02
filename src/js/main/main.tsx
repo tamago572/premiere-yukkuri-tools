@@ -57,7 +57,7 @@ const Main = () => {
     alert(
       `Node.js ${process.version}\nPlatform: ${
         os.platform
-      }\nFolder: ${path.basename(window.cep_node.global.__dirname)}`
+      }\nFolder: ${path.basename(window.cep_node.global.__dirname)}`,
     );
   };
 
@@ -70,69 +70,10 @@ const Main = () => {
   return (
     <div className="app" style={{ backgroundColor: bgColor }}>
       <header className="app-header">
-        <img src={bolt} className="icon" />
-        <div className="stack-icons">
-          <div>
-            <img src={viteLogo} />
-            Vite
-          </div>
-          +
-          <div>
-            <img src={reactLogo} />
-            React
-          </div>
-          +
-          <div>
-            <img src={tsLogo} />
-            TypeScript
-          </div>
-          +
-          <div>
-            <img src={sassLogo} />
-            Sass
-          </div>
+        <div className="">
+          {/* ドロップされるエリア */}
+          <h1 className="text-white">音声ファイルをここにドロップ</h1>
         </div>
-        <div className="button-group">
-          <button onClick={() => setCount((count) => count + 1)}>
-            Count is: {count}
-          </button>
-          <button onClick={nodeTest}>
-            <img className="icon-button" src={nodeJs} />
-          </button>
-          <button onClick={jsxTest}>
-            <img className="icon-button" src={adobe} />
-          </button>
-          <button onClick={jsxTestTS}>Ts</button>
-        </div>
-        <p>
-          Edit <code>main.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <button
-            className="app-link"
-            onClick={() =>
-              openLinkInBrowser("https://github.com/hyperbrew/bolt-cep")
-            }
-          >
-            Bolt Docs
-          </button>
-          {" | "}
-          <button
-            className="app-link"
-            onClick={() => openLinkInBrowser("https://reactjs.org")}
-          >
-            React Docs
-          </button>
-          {" | "}
-          <button
-            className="app-link"
-            onClick={() =>
-              openLinkInBrowser("https://vitejs.dev/guide/features.html")
-            }
-          >
-            Vite Docs
-          </button>
-        </p>
       </header>
     </div>
   );
