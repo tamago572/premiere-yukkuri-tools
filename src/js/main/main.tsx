@@ -11,20 +11,22 @@ import {
 
 import "./main.scss";
 
-import ParamSettingsArea from "./components/SettingsArea";
+import ParamSettingsArea from "../components/SettingsArea";
 import { useDropzone } from "react-dropzone";
 
 const Main = () => {
   const [message, setMessage] = useState("not dragged");
 
-  const onDrop = useCallback((files: File[]) => {}, []);
+  const onDrop = useCallback((files: File[]) => {
+    dragged();
+  }, []);
 
   const dragged = () => {
     console.log("Files dropped. from Node.js(React)");
     // evalES(`$.writeln("Files dropped. from ExtendScript writeln");`);
     // evalES(`console.log("Files dropped. from ExtendScript consolelog");`);
 
-    evalTS("helloStr", "this is a test message");
+    evalTS("helloWorld");
     setMessage(message === "dragged" ? "not dragged" : "dragged");
   };
 

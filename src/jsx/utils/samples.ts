@@ -9,7 +9,6 @@ export const helloError = (str: string) => {
 
 export const helloStr = (str: string) => {
   alert(`ExtendScript received a string: ${str}`);
-  console.log(`received: ${str}`);
   return str;
 };
 export const helloNum = (n: number) => {
