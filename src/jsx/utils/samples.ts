@@ -9,16 +9,16 @@ export const helloError = (str: string) => {
 
 export const helloStr = (str: string) => {
   alert(`ExtendScript received a string: ${str}`);
+  console.log(`received: ${str}`);
   return str;
 };
 export const helloNum = (n: number) => {
   alert(`ExtendScript received a number: ${n.toString()}`);
+
   return n;
 };
 export const helloArrayStr = (arr: string[]) => {
-  alert(
-    `ExtendScript received an array of ${arr.length} strings: ${arr.toString()}`
-  );
+  alert(`ExtendScript received an array of ${arr.length} strings: ${arr.toString()}`);
   return arr;
 };
 export const helloObj = (obj: { height: number; width: number }) => {
