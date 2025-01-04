@@ -11,15 +11,27 @@ import {
 
 import "./main.scss";
 
-import ParamSettingsArea from "../components/SettingsArea";
+import SettingsArea from "../components/SettingsArea";
 import DropArea from "../components/DropArea";
 
 const Main = () => {
+  const [settings, setSettings] = useState({
+    subtitle: "Default2",
+    subtitleFile: "",
+    subtitleTrack: 114,
+    audioTrack: 514,
+    buffer: 100,
+    textFileName: "{audioFileName}",
+    textEncoding: "shift-jis",
+    lineFeedCode: "crlf",
+    debugMode: true,
+  });
+
   return (
     <div className="app">
       <header className="app-header">
         <DropArea />
-        <ParamSettingsArea />
+        <SettingsArea settings={settings} setSettings={setSettings} />
       </header>
     </div>
   );

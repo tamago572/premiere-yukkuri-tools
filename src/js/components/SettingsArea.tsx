@@ -1,17 +1,7 @@
 import { useState } from "react";
+import { SettingsStateHook } from "../types/Settings";
 
-const ParamSettingsArea = () => {
-  const [settings, setSettings] = useState({
-    subtitle: "Default2",
-    subtitleFile: "",
-    subtitleTrack: 114,
-    audioTrack: 514,
-    buffer: 100,
-    textEncoding: "shift-jis",
-    lineFeedCode: "crlf",
-    debugMode: true,
-  });
-
+const SettingsArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) => {
   return (
     <div className="text-left">
       <div className="border p-4">
@@ -21,12 +11,15 @@ const ParamSettingsArea = () => {
         <p>V： {settings.subtitleTrack}</p>
         <p>A： {settings.audioTrack}</p>
         <p>buffer： {settings.buffer} ms</p>
+        <p>Text File Name： {settings.textFileName}</p>
         <p>Text ecd： {settings.textEncoding}</p>
         <p>line ecd： {settings.lineFeedCode}</p>
         <p>debug： {settings.debugMode ? "yes" : "no"}</p>
       </div>
 
       <h1 className="text-2xl font-bold">設定</h1>
+
+      {/* --------------------------- */}
 
       <div className="grid gap-4 my-8">
         <h2 className="text-xl font-bold">字幕設定</h2>
@@ -55,6 +48,8 @@ const ParamSettingsArea = () => {
           <button className="bg-white text-black py-1 px-3">追加</button>
         </label>
       </div>
+
+      {/* --------------------------- */}
 
       <div className="grid gap-4 my-8">
         <h2 className="text-xl font-bold">配置設定</h2>
@@ -117,10 +112,30 @@ const ParamSettingsArea = () => {
         </label>
       </div>
 
+      {/* --------------------------- */}
+
       <div className="grid gap-4 my-8">
         <h2 className="text-xl font-bold">詳細設定</h2>
 
         <h3 className="text-lg font-bold">テキストファイルの設定</h3>
+
+        <label htmlFor="">
+          <span className="mr-2">テキストファイル名</span>
+          <input
+            name=""
+            id=""
+            className="text-black p-1 rounded-sm"
+            value={settings.textFileName}
+            onChange={(e) => {
+              setSettings({ ...settings, textFileName: e.target.value });
+            }}
+          />
+          .txt
+          <br />
+          <span className="text-sm text-gray-400">
+            {"{"}audioFileName{"}"} → ドロップしたファイルのファイル名（拡張子省略）
+          </span>
+        </label>
 
         <label htmlFor="">
           <span className="mr-2">文字コード</span>
@@ -186,4 +201,4 @@ const ParamSettingsArea = () => {
   );
 };
 
-export default ParamSettingsArea;
+export default SettingsArea;
