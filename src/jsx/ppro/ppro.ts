@@ -1,7 +1,12 @@
-export const helloWorld = () => {
-  alert("Hello, world! 1秒後にまたアラートが出ます");
-  $.sleep(1000);
-  alert("hello");
+interface placeAudioWithSubtitlesProps {
+  subtitleFilePath: string;
+  voiceFilePath: string;
+}
 
-  return 0;
+export const placeAudioWithSubtitles = ({
+  subtitleFilePath,
+  voiceFilePath,
+}: placeAudioWithSubtitlesProps) => {
+  alert("ok");
+  return { exitCode: 0, msg: "正常に終了しました" };
 };
