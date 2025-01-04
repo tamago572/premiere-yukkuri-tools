@@ -10,8 +10,10 @@ import path from "path";
 const DropArea = () => {
   const [isDropped, setIsDropped] = useState(false);
 
-  const onDrop = (files: File[]) => {
+  const onDrop = useCallback((files: File[]) => {
     setIsDropped(true);
+
+    alert(files[0].type);
 
     // ExtendScriptを実行
     evalTS("placeAudioWithSubtitles", { subtitleFilePath: "a", voiceFilePath: "ab" }).then(
@@ -22,21 +24,14 @@ const DropArea = () => {
         }
       },
     );
-  };
+  }, []);
 
-  useEffect(() => {});
+  const { getRootProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <div
-      className={`h-96 w-full flex items-center justify-center  `}
-      // ${false ? "bg-zinc-400" : "bg-zinc-700 "}
-      onDrop={(e) => {
-        e.preventDefault();
-        alert(e.dataTransfer.files[0].path);
-      }}
-      onDragOver={(e) => {
-        e.preventDefault();
-      }}
+      {...getRootProps()}
+      className={`h-96 w-full flex items-center justify-center ${isDragActive ? "bg-zinc-400" : "bg-zinc-700 "} `}
     >
       {/* ドロップされるエリア */}
       <span className="text-white">{isDropped ? "処理中..." : "ここに音声ファイルをドロップ"}</span>
