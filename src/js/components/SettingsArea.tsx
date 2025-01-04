@@ -124,6 +124,7 @@ const SettingsArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) =>
           <input
             name=""
             id=""
+            type="text"
             className="text-black p-1 rounded-sm"
             value={settings.textFileName}
             onChange={(e) => {

@@ -30,7 +30,7 @@ const Main = () => {
   return (
     <div className="app">
       <header className="app-header">
-        <DropArea />
+        <DropArea settings={settings} setSettings={setSettings} />
         <SettingsArea settings={settings} setSettings={setSettings} />
       </header>
     </div>
