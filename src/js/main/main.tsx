@@ -18,8 +18,8 @@ const Main = () => {
   const [settings, setSettings] = useState({
     subtitle: "Default2",
     subtitleFile: "",
-    subtitleTrack: 114,
-    audioTrack: 514,
+    subtitleTrack: 2,
+    audioTrack: 2,
     buffer: 100,
     textFileName: "{audioFileName}",
     textEncoding: "shift-jis",

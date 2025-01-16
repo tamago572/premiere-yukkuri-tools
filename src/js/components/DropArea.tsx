@@ -53,8 +53,11 @@ const DropArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) => {
     // ExtendScriptを実行
     evalTS("placeAudioWithSubtitles", {
       voiceFilePath: droppedFilePath,
-      selectedMogrt: settings.subtitle,
+      mgtFilePath: settings.subtitle,
       text: "テキスト",
+      audioTrackNumber: settings.audioTrack,
+      videoTrackNumber: settings.subtitleTrack,
+      subtitleDurationBuffer: settings.buffer,
     }).then((res) => {
       // スクリプト終了時、終了コードが0なら  isDroppedをfalseに
       if (res.exitCode === 0) {
