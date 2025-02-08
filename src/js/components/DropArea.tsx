@@ -5,6 +5,8 @@ import path from "path";
 import { SettingsStateHook } from "../types/Settings";
 import { fs } from "../lib/cep/node";
 import iconv from "iconv-lite";
+import CSInterface from "../lib/cep/csinterface";
+import { error } from "console";
 
 const DropArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) => {
   const [isDropped, setIsDropped] = useState(false); // ドロップされたかどうか
@@ -34,13 +36,18 @@ const DropArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) => {
       setIsDragOver(false); // ドラッグオーバー中を解除 (背景色を戻す)
       return;
     }
+    alert(droppedFilePath);
+
+    alert(txtFilePath);
 
     // ドロップされた音声ファイルの拡張子が.wavか.mp3でない場合
     if (path.extname(droppedFilePath) !== ".wav" && path.extname(droppedFilePath) !== ".mp3") {
       evalTS(
         "showAlert",
         "この拡張子には対応していません\n音声ファイルの拡張子は.wavか.mp3である必要があります。",
-      );
+      ).then((error) => {
+        alert(error);
+      });
       setIsDropped(false);
       setIsDragOver(false); // ドラッグオーバー中を解除 (背景色を戻す)
       return;
@@ -70,6 +77,7 @@ const DropArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) => {
       onDrop={(e) => {
         e.preventDefault();
         onDrop(e.dataTransfer.files[0].path); // .pathで警告が出てるが動くのでおｋ
+        // alert(e.dataTransfer.files[0].webkitRelativePath);
       }}
       onDragOver={(e) => {
         e.preventDefault();
