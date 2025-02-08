@@ -134,7 +134,11 @@ const SettingsArea: React.FC<SettingsStateHook> = ({ settings, setSettings }) =>
           .txt
           <br />
           <span className="text-sm text-gray-400">
+            # 変数一覧
+            <br />
             {"{"}audioFileName{"}"} → ドロップしたファイルのファイル名（拡張子省略）
+            <br />
+            {/* {"{"}any{"}"} → 任意の文字列 */}
           </span>
         </label>
 
